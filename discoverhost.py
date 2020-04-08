@@ -4,6 +4,7 @@
 import dns.resolver, argparse, sys, subprocess
 from urllib import urlopen
 from time import sleep
+from tqdm import tqdm
 
 
 opciones = argparse.ArgumentParser(description="Detector de subdominios:", epilog="https://raw.githubusercontent.com/rbsec/dnscan/master/subdomains-10000.txt",usage="Ejemplo: python discoverhost.py -t google.com -l https://raw.githubusercontent.com/sergionidis/discoverhost/master/subdominios.txt")
@@ -11,7 +12,7 @@ opciones.add_argument('-t','--target',help="Dominio principal")
 opciones.add_argument('-l','--list',help="Url de la lista de subdominios")
 opciones = opciones.parse_args()
 
-
+#Imprimimos un Hello friend por cortesía :p
 hello = "Hola amigo  "
 for char in hello:
     sleep(0.1)
@@ -35,19 +36,20 @@ def main():
 	ListaSubdominios = wordlist.read().split('\n')
 	lista = []
 
-	for sub in ListaSubdominios:
-		print ('Probando con: {}'.format(sub))
+	for sub in tqdm(ListaSubdominios):
 		
 		
-		
+    	
 		try:
 			a = ('{}.{}'.format(sub,opciones.target))
 			q = dns.resolver.query(a,'A')
 			lista.append(a)
-			subprocess.call('clear', shell=True)
+			
+		except KeyboardInterrupt:
+			exit()
 		except:
 			pass
-		
+#Listamos los subdominios encontrados.		
 	if len(lista) > 0:
 			print('Numero de subdominios posibles: {}'.format(len(lista)))
 			for e in lista:
@@ -55,6 +57,7 @@ def main():
 	else:
 			print("No se encontraron subdominios")				
 
+#Llamamos a la función principal
 if __name__ == '__main__':
 	try:
 		main()
