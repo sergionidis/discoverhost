@@ -7,7 +7,7 @@ google.com
 Posibles subdoinios:
 www.google.com
 support.google.com
-etc
+etc etc
 
 ```
 
