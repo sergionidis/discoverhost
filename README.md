@@ -1,7 +1,8 @@
 # discoverhost
 
 ```
-Es un script que realiza consultas dns sobre un dominio base para descubrir posibles subdominios.
+Tool para realizar consultas dns sobre un dominio base para descubrir posibles subdominios mediante fuerza bruta.
+Brute force dns tool
 Dominio base:
 google.com
 Posibles subdoinios:
